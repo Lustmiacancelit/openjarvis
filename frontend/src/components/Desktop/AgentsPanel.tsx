@@ -18,7 +18,7 @@ import {
 import type { ManagedAgent, AgentTask, AgentMessage, AgentTemplate, LearningLogEntry, AgentTrace } from '../../lib/api';
 
 // ---------------------------------------------------------------------------
-// Colors — Catppuccin Mocha
+// Colors â€” Catppuccin Mocha
 // ---------------------------------------------------------------------------
 
 const C = {
@@ -88,8 +88,8 @@ function formatSchedule(type?: string, value?: string): string {
 }
 
 function formatCost(cost?: number): string {
-  if (cost === undefined || cost === null) return '—';
-  if (cost < 0.01) return `$${(cost * 100).toFixed(2)}¢`;
+  if (cost === undefined || cost === null) return 'â€”';
+  if (cost < 0.01) return `$${(cost * 100).toFixed(2)}Â¢`;
   return `$${cost.toFixed(3)}`;
 }
 
@@ -209,7 +209,7 @@ function LaunchWizard({
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', borderBottom: `1px solid ${C.border}` }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ color: C.accent, fontSize: 16 }}>◈</span>
+            <span style={{ color: C.accent, fontSize: 16 }}>â—ˆ</span>
             <span style={{ color: C.text, fontWeight: 600, fontSize: 15 }}>Launch Agent</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -226,12 +226,12 @@ function LaunchWizard({
                   }}>
                     {s}
                   </span>
-                  {s < 3 && <span style={{ color: C.overlay0 }}>›</span>}
+                  {s < 3 && <span style={{ color: C.overlay0 }}>â€º</span>}
                 </span>
               ))}
             </div>
             <button onClick={onClose} style={{ background: 'none', border: 'none', color: C.overlay0, cursor: 'pointer', fontSize: 18, lineHeight: 1, padding: 2 }}>
-              ✕
+              âœ•
             </button>
           </div>
         </div>
@@ -316,7 +316,7 @@ function LaunchWizard({
                   <input
                     style={{ ...inputStyle, opacity: wizard.scheduleType === 'manual' ? 0.4 : 1 }}
                     type="text"
-                    placeholder={wizard.scheduleType === 'cron' ? '0 * * * *' : wizard.scheduleType === 'interval' ? '1h' : '—'}
+                    placeholder={wizard.scheduleType === 'cron' ? '0 * * * *' : wizard.scheduleType === 'interval' ? '1h' : 'â€”'}
                     value={wizard.scheduleValue}
                     onChange={(e) => update({ scheduleValue: e.target.value })}
                     disabled={wizard.scheduleType === 'manual'}
@@ -517,7 +517,7 @@ function InteractTab({ apiUrl, agentId }: { apiUrl: string; agentId: string }) {
               >
                 <div style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{msg.content}</div>
                 <div style={{ color: C.overlay0, fontSize: 10, marginTop: 4, textAlign: isUser ? 'right' : 'left' }}>
-                  {isUser ? `You · ${msg.mode}` : 'Agent'} · {msg.status}
+                  {isUser ? `You Â· ${msg.mode}` : 'Agent'} Â· {msg.status}
                 </div>
               </div>
             </div>
@@ -538,7 +538,7 @@ function InteractTab({ apiUrl, agentId }: { apiUrl: string; agentId: string }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Send a message to this agent… (Enter to send)"
+            placeholder="Send a message to this agentâ€¦ (Enter to send)"
             rows={2}
             style={{
               width: '100%', padding: '8px 12px', borderRadius: 6,
@@ -740,7 +740,7 @@ function OverviewTab({ agent, onRun, onPause, onResume, onRecover }: {
             cursor: 'pointer', fontSize: 12, fontWeight: 600,
           }}
         >
-          ▶ Run Now
+          â–¶ Run Now
         </button>
         {canPause && (
           <button
@@ -751,7 +751,7 @@ function OverviewTab({ agent, onRun, onPause, onResume, onRecover }: {
               cursor: 'pointer', fontSize: 12, fontWeight: 600,
             }}
           >
-            ⏸ Pause
+            â¸ Pause
           </button>
         )}
         {canResume && (
@@ -763,7 +763,7 @@ function OverviewTab({ agent, onRun, onPause, onResume, onRecover }: {
               cursor: 'pointer', fontSize: 12, fontWeight: 600,
             }}
           >
-            ▶ Resume
+            â–¶ Resume
           </button>
         )}
         {canRecover && (
@@ -775,7 +775,7 @@ function OverviewTab({ agent, onRun, onPause, onResume, onRecover }: {
               cursor: 'pointer', fontSize: 12, fontWeight: 600,
             }}
           >
-            ↺ Recover
+            â†º Recover
           </button>
         )}
       </div>
@@ -977,7 +977,7 @@ function DetailPanel({
           <h2 style={{ color: C.text, fontSize: 18, fontWeight: 700, margin: 0 }}>{agent.name}</h2>
         </div>
         <div style={{ color: C.overlay0, fontSize: 12 }}>
-          {agent.agent_type} · Schedule: {formatSchedule(agent.schedule_type, agent.schedule_value)} · Last run: {formatRelativeTime(agent.last_run_at)}
+          {agent.agent_type} Â· Schedule: {formatSchedule(agent.schedule_type, agent.schedule_value)} Â· Last run: {formatRelativeTime(agent.last_run_at)}
         </div>
       </div>
 
@@ -1108,7 +1108,7 @@ export function AgentsPanel({ apiUrl }: Props) {
 
   return (
     <div style={{ display: 'flex', height: '100%', minHeight: 0 }}>
-      {/* Left panel — agent list */}
+      {/* Left panel â€” agent list */}
       <div style={{ width: 300, flexShrink: 0, borderRight: `1px solid ${C.border}`, display: 'flex', flexDirection: 'column' }}>
         {/* Header */}
         <div style={{ padding: '12px 14px', borderBottom: `1px solid ${C.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -1156,7 +1156,7 @@ export function AgentsPanel({ apiUrl }: Props) {
                     }}
                     title="Delete agent"
                   >
-                    ×
+                    Ã—
                   </button>
                 </div>
                 <div style={{ color: C.overlay0, fontSize: 11, marginTop: 4 }}>
@@ -1177,7 +1177,7 @@ export function AgentsPanel({ apiUrl }: Props) {
         </div>
       </div>
 
-      {/* Right panel — detail */}
+      {/* Right panel â€” detail */}
       <div style={{ flex: 1, overflowY: 'auto', padding: 20, minWidth: 0 }}>
         {selected ? (
           <DetailPanel

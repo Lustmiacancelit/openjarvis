@@ -62,7 +62,7 @@ export async function* streamResearch(
   query: string,
   signal?: AbortSignal,
 ): AsyncGenerator<ResearchEvent> {
-  // /api/research is mounted at the server root — strip any trailing /v1
+  // /api/research is mounted at the server root â€” strip any trailing /v1
   // from the base so configurations like "http://host:8000/v1" still resolve.
   const base = getBase().replace(/\/v1\/?$/, '');
   const response = await fetch(`${base}/api/research`, {

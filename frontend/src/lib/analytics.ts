@@ -6,11 +6,11 @@
  *     via GET /v1/analytics/identity, so all backend / install.sh /
  *     frontend events tie to the same person.
  *   - Initializes posthog-js with autocapture, session replay, and
- *     pageviews disabled — we send only events we explicitly call out.
+ *     pageviews disabled â€” we send only events we explicitly call out.
  *   - Registers the app version as a super-property so every event
  *     carries it uniformly (no per-event repetition needed).
  *   - Fails silently when the backend isn't reachable, when analytics
- *     is disabled, or when the SDK throws — must never break the UI.
+ *     is disabled, or when the SDK throws â€” must never break the UI.
  *
  * Opt-out matches the backend: if /identity returns enabled=false
  * (analytics disabled in config), the SDK is never
@@ -21,7 +21,7 @@ import posthog from 'posthog-js';
 import { getBase } from './api';
 
 /**
- * Mirror of the Python event catalog (src/openjarvis/analytics/events.py
+ * Mirror of the Python event catalog (src/Jarvis/analytics/events.py
  * REGISTRY). Anything not in this set is dropped with a console.warn at
  * track() time, so typos and unallowed events don't silently ship.
  *
@@ -47,7 +47,7 @@ const KNOWN_EVENTS = new Set<string>([
   'usage_daily_summary',
 ]);
 
-// Hardcoded app version — should match the backend.
+// Hardcoded app version â€” should match the backend.
 // TODO: wire to Vite define() so this comes from package.json at build time.
 const APP_VERSION = '0.1.0';
 
@@ -64,7 +64,7 @@ let cachedAnonId = '';
 
 /**
  * Fetch identity from the backend and initialize the SDK.
- * Idempotent — safe to call multiple times.
+ * Idempotent â€” safe to call multiple times.
  */
 export async function initAnalytics(): Promise<void> {
   if (initialized) return;
@@ -87,14 +87,14 @@ export async function initAnalytics(): Promise<void> {
     posthog.init(identity.key, {
       api_host: identity.host,
       bootstrap: { distinctID: identity.anon_id },
-      // No surprise data collection — only events we call out by name.
+      // No surprise data collection â€” only events we call out by name.
       autocapture: false,
       capture_pageview: false,
       capture_pageleave: false,
       disable_session_recording: true,
       // No /decide call for feature flags (saves a request, we don't use them yet).
       advanced_disable_decide: true,
-      // No PostHog person profiles — we're not making accounts, just sending events.
+      // No PostHog person profiles â€” we're not making accounts, just sending events.
       person_profiles: 'never',
       // Don't try to load IP geolocation; backend disables this too.
       ip: false,
@@ -114,7 +114,7 @@ export async function initAnalytics(): Promise<void> {
       platform: detectPlatform(),
     });
   } catch {
-    // Any failure → analytics off, silently.
+    // Any failure â†’ analytics off, silently.
   }
 }
 
@@ -134,7 +134,7 @@ export function track(
       console.warn(
         `[analytics] Unknown event "${event}" dropped. ` +
           `Add it to KNOWN_EVENTS in lib/analytics.ts and to the Python ` +
-          `REGISTRY in src/openjarvis/analytics/events.py.`,
+          `REGISTRY in src/Jarvis/analytics/events.py.`,
       );
     }
     return;
@@ -172,7 +172,7 @@ export function getAnonId(): string {
  * Used for model / tool names that we want to cohort on without
  * actually shipping the raw value (e.g. proprietary model names a
  * power user has configured). Mirror of the backend's
- * :func:`openjarvis.analytics.redaction.hash_id`.
+ * :func:`Jarvis.analytics.redaction.hash_id`.
  */
 export async function hashId(s: string): Promise<string> {
   if (!s) return '';

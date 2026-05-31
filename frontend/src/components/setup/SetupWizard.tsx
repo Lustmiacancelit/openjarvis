@@ -21,7 +21,7 @@ export function SetupWizard({ onComplete }: { onComplete: (firstQuery?: string) 
 
   const handleConnectComplete = () => {
     // connectedIds: those actually in selectedIds that were not skipped.
-    // We don't track skip state here — IngestDashboard receives all selected
+    // We don't track skip state here â€” IngestDashboard receives all selected
     // (skipped ones will just fail gracefully on sync status fetch).
     setConnectedIds(selectedIds);
     setStep('ingest');

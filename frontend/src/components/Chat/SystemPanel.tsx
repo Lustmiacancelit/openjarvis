@@ -122,10 +122,10 @@ export function SystemPanel() {
           </h4>
           <div className="grid grid-cols-2 gap-2">
             {energy?.cpu_temp_c != null && (
-              <MiniStat icon={Thermometer} label="CPU Temp" value={String(Math.round(energy.cpu_temp_c))} unit="°C" />
+              <MiniStat icon={Thermometer} label="CPU Temp" value={String(Math.round(energy.cpu_temp_c))} unit="Â°C" />
             )}
             {energy?.gpu_temp_c != null && (
-              <MiniStat icon={Thermometer} label="GPU Temp" value={String(Math.round(energy.gpu_temp_c))} unit="°C" />
+              <MiniStat icon={Thermometer} label="GPU Temp" value={String(Math.round(energy.gpu_temp_c))} unit="Â°C" />
             )}
             <MiniStat
               icon={Zap}
@@ -257,7 +257,7 @@ export function SystemPanel() {
           </button>
 
           <a
-            href="https://open-jarvis.github.io/OpenJarvis/leaderboard"
+            href="https://open-jarvis.github.io/Jarvis/leaderboard"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 mt-1.5 px-3 py-1.5 text-[11px] rounded-lg transition-colors"

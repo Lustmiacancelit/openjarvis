@@ -22,13 +22,13 @@ function previewArgs(raw: string): string {
       const [k, v] = entries[0];
       const valStr =
         typeof v === 'string' ? v : JSON.stringify(v);
-      const trimmed = valStr.length > 40 ? `${valStr.slice(0, 40)}…` : valStr;
-      return entries.length === 1 ? `${k}: ${trimmed}` : `${k}: ${trimmed}, …`;
+      const trimmed = valStr.length > 40 ? `${valStr.slice(0, 40)}â€¦` : valStr;
+      return entries.length === 1 ? `${k}: ${trimmed}` : `${k}: ${trimmed}, â€¦`;
     }
   } catch {
     /* fall through */
   }
-  return raw.length > 60 ? `${raw.slice(0, 60)}…` : raw;
+  return raw.length > 60 ? `${raw.slice(0, 60)}â€¦` : raw;
 }
 
 export function ToolCallCard({ toolCall }: Props) {

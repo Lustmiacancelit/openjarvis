@@ -166,7 +166,7 @@ export function IngestDashboard({
           }}
         >
           {!allDone && <Loader2 size={16} className="animate-spin" />}
-          Start Researching →
+          Start Researching â†’
         </button>
         {!allDone && (
           <p className="text-center text-xs mt-2" style={{ color: 'var(--color-text-tertiary)' }}>

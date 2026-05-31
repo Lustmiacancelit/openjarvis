@@ -50,7 +50,7 @@ export function OptInModal({ onClose }: OptInModalProps) {
   };
 
   const features = [
-    { icon: Lock, label: 'Private — no IP or hardware info shared publicly' },
+    { icon: Lock, label: 'Private â€” no IP or hardware info shared publicly' },
     { icon: Zap, label: 'Track energy savings from local inference' },
     { icon: DollarSign, label: 'See how much you save vs cloud providers' },
     { icon: Cpu, label: 'Measure FLOPs and request efficiency' },

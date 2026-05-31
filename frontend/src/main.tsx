@@ -9,7 +9,7 @@ import './index.css';
 
 function applyTheme() {
   try {
-    const raw = localStorage.getItem('openjarvis-settings');
+    const raw = localStorage.getItem('Jarvis-settings');
     const settings = raw ? JSON.parse(raw) : {};
     const theme = settings.theme || 'system';
     if (theme === 'dark') {
@@ -28,7 +28,7 @@ applyTheme();
 // This ensures JARVIS_PORT is defined in one place (the Rust backend).
 // In non-Tauri environments this is a no-op.
 initApiBase().finally(() => {
-  // Kick off analytics init in the background — it's never awaited so
+  // Kick off analytics init in the background â€” it's never awaited so
   // a slow/failed identity fetch never delays UI render.
   void initAnalytics();
 

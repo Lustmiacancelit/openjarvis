@@ -13,10 +13,10 @@ interface HastNode {
 // promoted to a pill); other links + code/pre/script/style are skipped.
 const SKIP_TAGS = new Set(['code', 'pre', 'script', 'style']);
 
-// Matches `[N]` or `[N, M, ...]` — bracketed comma-separated digit lists.
+// Matches `[N]` or `[N, M, ...]` â€” bracketed comma-separated digit lists.
 // Whitespace inside the brackets is tolerated. An optional trailing
 // whitespace run is consumed when followed by sentence punctuation, so we
-// can render `… San Francisco [1].` without a stray space before the period.
+// can render `â€¦ San Francisco [1].` without a stray space before the period.
 const CITATION_RE =
   /\[(\s*\d+(?:\s*,\s*\d+)*\s*)\](\s+(?=[.,;:!?]))?/g;
 
@@ -40,7 +40,7 @@ function buildTooltip(src: ResearchSource): string {
   if (src.sender) meta.push(src.sender);
   const date = formatTooltipDate(src.date);
   if (date) meta.push(date);
-  if (meta.length > 0) parts.push(meta.join(' · '));
+  if (meta.length > 0) parts.push(meta.join(' Â· '));
   return parts.join('\n');
 }
 
@@ -72,9 +72,9 @@ function parseRefList(inner: string): number[] {
  * pill links to the underlying source.
  *
  * Patterns handled:
- *   • `[1]`             — single ref
- *   • `[4, 7, 20]`      — grouped refs → individual pills, no separators
- *   • `[1](https://…)`  — markdown link whose text is just a number; the
+ *   â€¢ `[1]`             â€” single ref
+ *   â€¢ `[4, 7, 20]`      â€” grouped refs â†’ individual pills, no separators
+ *   â€¢ `[1](https://â€¦)`  â€” markdown link whose text is just a number; the
  *                         inline URL is discarded in favor of the source-map
  *                         URL so all citations stay routed through Gmail.
  *
@@ -131,7 +131,7 @@ export function rehypeCitations(options: {
   }
 
   function tryMarkdownCitationLink(node: HastNode): HastNode | null {
-    // `[1](url)` → <a href="url">1</a>. If the link text is just a number
+    // `[1](url)` â†’ <a href="url">1</a>. If the link text is just a number
     // and we have a source for that ref, replace with our pill.
     if (
       node.type !== 'element' ||
@@ -170,14 +170,14 @@ export function rehypeCitations(options: {
         continue;
       }
 
-      // 2. Other elements — recurse but don't transform inside <a>/code/etc.
+      // 2. Other elements â€” recurse but don't transform inside <a>/code/etc.
       if (child.type === 'element') {
         if (child.tagName !== 'a') walk(child);
         out.push(child);
         continue;
       }
 
-      // 3. Text node — look for [N] and [N, M, …] patterns.
+      // 3. Text node â€” look for [N] and [N, M, â€¦] patterns.
       if (child.type === 'text' && typeof child.value === 'string') {
         const replaced = transformText(child.value);
         if (replaced) {

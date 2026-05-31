@@ -124,7 +124,7 @@ export function MessageBubble({ message, isLive = false }: Props) {
 
   const cleanContent = useMemo(() => stripThinkTags(message.content), [message.content]);
 
-  // Build a ref→source lookup once per render. Memoized so the rehype plugin
+  // Build a refâ†’source lookup once per render. Memoized so the rehype plugin
   // identity stays stable until the source list actually changes.
   const sourcesMap = useMemo(() => {
     const m = new Map<number, NonNullable<ChatMessage['researchSources']>[number]>();

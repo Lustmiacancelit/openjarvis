@@ -16,7 +16,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'OpenJarvis',
+        name: 'Jarvis',
         short_name: 'Jarvis',
         description: 'On-device AI assistant',
         theme_color: '#161618',
@@ -34,7 +34,7 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: '../src/openjarvis/server/static',
+    outDir: '../src/Jarvis/server/static',
     emptyOutDir: true,
     minify: 'esbuild',
     rollupOptions: {

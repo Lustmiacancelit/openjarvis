@@ -24,7 +24,7 @@ function formatTimeRange(tr: TimeRange | string | undefined): string | null {
   if (typeof tr === 'string') return tr.trim() || null;
   const start = tr.start ? fmtDate(tr.start) : null;
   const end = tr.end ? fmtDate(tr.end) : null;
-  if (start && end) return start === end ? start : `${start} – ${end}`;
+  if (start && end) return start === end ? start : `${start} â€“ ${end}`;
   if (start) return `after ${start}`;
   if (end) return `before ${end}`;
   return null;
@@ -35,7 +35,7 @@ function summarizeTraces(traces: ResearchSearchTrace[]): string {
   const hits = traces.reduce((s, t) => s + (t.numHits ?? 0), 0);
   const searchLabel = `${n} ${n === 1 ? 'search' : 'searches'}`;
   if (hits === 0) return searchLabel;
-  return `${searchLabel} · ${hits} ${hits === 1 ? 'result' : 'results'}`;
+  return `${searchLabel} Â· ${hits} ${hits === 1 ? 'result' : 'results'}`;
 }
 
 function StatusLine({ text }: { text: string }) {
@@ -44,7 +44,7 @@ function StatusLine({ text }: { text: string }) {
       className="text-xs leading-relaxed animate-pulse"
       style={{ color: 'var(--color-text-tertiary)' }}
     >
-      {text}…
+      {text}â€¦
     </div>
   );
 }
@@ -94,7 +94,7 @@ function TimelineStep({
         className="text-sm"
         style={{ color: 'var(--color-text)', fontWeight: 450 }}
       >
-        “{trace.query}”
+        â€œ{trace.query}â€
       </div>
 
       {meta.length > 0 && (
@@ -102,7 +102,7 @@ function TimelineStep({
           className="text-[11px] mt-0.5"
           style={{ color: 'var(--color-text-tertiary)' }}
         >
-          {meta.join(' · ')}
+          {meta.join(' Â· ')}
         </div>
       )}
 
@@ -130,7 +130,7 @@ function TimelineStep({
           className="text-[11px] mt-0.5 truncate"
           style={{ color: 'var(--color-text-tertiary)', opacity: 0.75 }}
         >
-          {trace.topTitles.slice(0, 2).join(' · ')}
+          {trace.topTitles.slice(0, 2).join(' Â· ')}
         </div>
       )}
     </div>
@@ -144,8 +144,8 @@ export function ResearchTimeline({ traces, isLive, hasContent }: Props) {
   const showSynthesizing = isLive && allComplete && !hasContent;
 
   // Auto-collapse the timeline the moment synthesis text begins streaming.
-  // Subsequent user toggles win — we only fire the auto-collapse once per
-  // false→true transition of hasContent.
+  // Subsequent user toggles win â€” we only fire the auto-collapse once per
+  // falseâ†’true transition of hasContent.
   const [expanded, setExpanded] = useState(true);
   const prevHasContent = useRef(false);
   useEffect(() => {
@@ -157,7 +157,7 @@ export function ResearchTimeline({ traces, isLive, hasContent }: Props) {
 
   if (!showAnalyzing && traces.length === 0) return null;
 
-  // No collapse affordance before any traces have arrived — just the
+  // No collapse affordance before any traces have arrived â€” just the
   // analyzing status sitting alone.
   if (traces.length === 0) {
     return (

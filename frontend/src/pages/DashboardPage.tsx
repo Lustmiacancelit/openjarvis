@@ -19,7 +19,7 @@ export function DashboardPage() {
             </div>
           </div>
           <p className="text-sm mt-2 max-w-2xl" style={{ color: 'var(--color-text-secondary)' }}>
-            Live telemetry for the on-device inference engine — power draw, token throughput, and cost savings versus cloud APIs.
+            Live telemetry for the on-device inference engine â€” power draw, token throughput, and cost savings versus cloud APIs.
           </p>
         </header>
 

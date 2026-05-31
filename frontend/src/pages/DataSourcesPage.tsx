@@ -313,7 +313,7 @@ const IconFor = ({ id, size = 18 }: { id: string; size?: number }) => {
 };
 
 // The Gmail card unifies the OAuth (`gmail`) and IMAP (`gmail_imap`) backend
-// connectors — both should resolve to the gmail_imap catalog entry so the
+// connectors â€” both should resolve to the gmail_imap catalog entry so the
 // connected card shows the same name, unit label, and troubleshooting tips
 // regardless of which underlying flow the user picked.
 function metaFor(connectorId: string) {
@@ -369,7 +369,7 @@ function GmailOAuthAdvanced({
               rel="noopener noreferrer"
               style={{ color: 'var(--color-accent)', textDecoration: 'underline' }}
             >
-              Google Cloud Credentials →
+              Google Cloud Credentials â†’
             </a>{' '}
             then paste the Client ID and Client Secret below.
           </div>
@@ -478,19 +478,19 @@ function SyncStatusDisplay({
   }
 
   // Treat the SyncEngine's checkpointed items_synced as the source of
-  // truth for "total indexed" — `chunks` from listConnectors counts
+  // truth for "total indexed" â€” `chunks` from listConnectors counts
   // embedding chunks (often != source items) and the checkpoint is what
   // both the syncing and idle branches need to display consistently.
   const totalIndexed = sync?.items_synced ?? chunks;
   const itemsTotal = sync?.items_total ?? 0;
   const backlogRange = formatBacklogRange(sync?.oldest_item_date);
-  // "Complete inbox" — the user has indexed everything reachable. Only
+  // "Complete inbox" â€” the user has indexed everything reachable. Only
   // surface this label when idle (during a sync we always show how far
   // back we've gotten so far).
   const isComplete =
     totalIndexed > 0 && itemsTotal > 0 && totalIndexed >= itemsTotal;
 
-  // Actively syncing — single status line + reassurance line.
+  // Actively syncing â€” single status line + reassurance line.
   if (sync?.state === 'syncing' || syncing) {
     const rangeLabel = backlogRange ?? 'building corpus';
     return (
@@ -504,17 +504,17 @@ function SyncStatusDisplay({
             ({rangeLabel})
           </span>{' '}
           <span style={{ color: 'var(--color-text-tertiary)' }}>
-            · Still indexing…
+            Â· Still indexingâ€¦
           </span>
         </div>
         <div style={{ fontSize: 10.5, color: 'var(--color-text-tertiary)' }}>
-          Deep Research available now · results improve as more {unitLabel} are indexed
+          Deep Research available now Â· results improve as more {unitLabel} are indexed
         </div>
       </div>
     );
   }
 
-  // Idle — already has indexed items: show the corpus size + range or
+  // Idle â€” already has indexed items: show the corpus size + range or
   // "complete inbox" label, plus how long ago we last refreshed it.
   if (totalIndexed > 0) {
     const lastSyncLabel = formatTimeAgo(sync?.last_sync);
@@ -533,7 +533,7 @@ function SyncStatusDisplay({
             )}
             {lastSyncLabel && (
               <span style={{ color: 'var(--color-text-tertiary)' }}>
-                {' · '}Last synced {lastSyncLabel}
+                {' Â· '}Last synced {lastSyncLabel}
               </span>
             )}
           </span>
@@ -565,8 +565,8 @@ function SyncStatusDisplay({
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <span style={{ fontSize: 12, color: 'var(--color-text-tertiary)' }}>
           {hasSynced
-            ? `Synced — 0 ${unitLabel} found`
-            : 'Connected — not synced yet'}
+            ? `Synced â€” 0 ${unitLabel} found`
+            : 'Connected â€” not synced yet'}
         </span>
         <button
           onClick={handleSync}
@@ -582,7 +582,7 @@ function SyncStatusDisplay({
       </div>
       {hasSynced && connectorId === 'slack' && (
         <div style={{ fontSize: 10, color: 'var(--color-text-tertiary)', marginTop: 4 }}>
-          Tip: invite the bot to channels with /invite @OpenJarvis, then re-sync
+          Tip: invite the bot to channels with /invite @Jarvis, then re-sync
         </div>
       )}
       {syncError && (
@@ -660,7 +660,7 @@ function DataSourcesSection() {
       await disconnectSource(id);
       loadConnectors();
     } catch {
-      // Surface failures silently — the connector list will refresh on the
+      // Surface failures silently â€” the connector list will refresh on the
       // next poll and reflect the true state regardless.
     } finally {
       setDisconnectingId(null);
@@ -707,7 +707,7 @@ function DataSourcesSection() {
     } catch (err: any) {
       let errorMsg = err.message || 'Connection failed';
       if (id === 'gmail_imap' && (errorMsg.includes('auth') || errorMsg.includes('credentials') || errorMsg.includes('LOGIN'))) {
-        errorMsg = 'Invalid credentials — make sure you\'re using an App Password (16 characters), not your regular Gmail password.';
+        errorMsg = 'Invalid credentials â€” make sure you\'re using an App Password (16 characters), not your regular Gmail password.';
       }
       setConnectError(errorMsg);
       setConnectStage('');
@@ -738,7 +738,7 @@ function DataSourcesSection() {
       const dropId = gmail.chunks >= gmailImap.chunks ? 'gmail_imap' : 'gmail';
       return connectors.filter((c) => c.connector_id !== dropId);
     }
-    // Neither connected — show only the IMAP card as the default flow.
+    // Neither connected â€” show only the IMAP card as the default flow.
     return connectors.filter((c) => c.connector_id !== 'gmail');
   })();
 
@@ -755,7 +755,7 @@ function DataSourcesSection() {
       <div className="flex flex-col gap-5">
         <section>
           <div className="hud-label mb-2" style={{ color: 'var(--color-text-tertiary)' }}>
-            Loading sources…
+            Loading sourcesâ€¦
           </div>
           <div className="flex flex-col gap-2">
             {[0, 1, 2, 3].map((i) => (
@@ -782,7 +782,7 @@ function DataSourcesSection() {
         <section>
           <div className="hud-label mb-2 flex items-center gap-2">
             <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: 999, background: 'var(--color-success)' }} />
-            Connected · {connected.length}
+            Connected Â· {connected.length}
           </div>
           <div className="flex flex-col gap-2">
           {connected.map((c) => {
@@ -831,7 +831,7 @@ function DataSourcesSection() {
                       opacity: disconnectingId === c.connector_id ? 0.5 : 1,
                     }}
                   >
-                    {disconnectingId === c.connector_id ? 'Disconnecting…' : 'Disconnect'}
+                    {disconnectingId === c.connector_id ? 'Disconnectingâ€¦' : 'Disconnect'}
                   </button>
                 </div>
               </div>
@@ -846,7 +846,7 @@ function DataSourcesSection() {
         <section>
           <div className="hud-label mb-2 flex items-center gap-2">
             <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: 999, background: 'var(--color-text-tertiary)' }} />
-            Available · {notConnected.length}
+            Available Â· {notConnected.length}
           </div>
           <div className="grid grid-cols-2 gap-2">
           {notConnected.map((c) => {
@@ -880,7 +880,7 @@ function DataSourcesSection() {
                     </div>
                   </div>
                   <span style={{ color: 'var(--color-text-secondary)', fontSize: 12, fontWeight: 500 }}>
-                    {isExpanded ? '× Close' : '+ Add'}
+                    {isExpanded ? 'Ã— Close' : '+ Add'}
                   </span>
                 </div>
 
@@ -1025,11 +1025,11 @@ const MESSAGING_CHANNELS: MessagingChannelConfig[] = [
     setupSteps: [
       '1. Go to api.slack.com/apps \u2192 click "Create New App" \u2192 choose "From an app manifest"',
       '2. Select your workspace. When asked for the manifest format, choose JSON. Then paste the manifest below (click "Copy" to copy it):',
-      'COPYABLE:{"display_information":{"name":"OpenJarvis"},"features":{"app_home":{"home_tab_enabled":true,"messages_tab_enabled":true,"messages_tab_read_only_enabled":false},"bot_user":{"display_name":"OpenJarvis","always_online":true}},"oauth_config":{"scopes":{"bot":["chat:write","im:write","im:read","im:history","mpim:read","mpim:history","users:read","channels:read","channels:history","channels:join","groups:read","groups:history","app_mentions:read"]}},"settings":{"event_subscriptions":{"bot_events":["message.im"]},"socket_mode_enabled":true}}',
+      'COPYABLE:{"display_information":{"name":"Jarvis"},"features":{"app_home":{"home_tab_enabled":true,"messages_tab_enabled":true,"messages_tab_read_only_enabled":false},"bot_user":{"display_name":"Jarvis","always_online":true}},"oauth_config":{"scopes":{"bot":["chat:write","im:write","im:read","im:history","mpim:read","mpim:history","users:read","channels:read","channels:history","channels:join","groups:read","groups:history","app_mentions:read"]}},"settings":{"event_subscriptions":{"bot_events":["message.im"]},"socket_mode_enabled":true}}',
       '3. Click "Next" \u2192 review the summary \u2192 click "Create". Then go to "Install App" in the left sidebar \u2192 click "Install to Workspace" \u2192 click "Allow"',
       '4. In the left sidebar, click "OAuth & Permissions". Copy the "Bot User OAuth Token" (starts with xoxb-...)',
       '5. In the left sidebar, click "Basic Information" \u2192 scroll to "App-Level Tokens" \u2192 click "Generate Token and Scopes" \u2192 name it "socket" \u2192 click "Add Scope" \u2192 select "connections:write" \u2192 click "Generate" \u2192 copy the token (starts with xapp-...)',
-      '6. (Optional) Still in "Basic Information", scroll to "Display Information" \u2192 upload the OpenJarvis icon as the app icon',
+      '6. (Optional) Still in "Basic Information", scroll to "Display Information" \u2192 upload the Jarvis icon as the app icon',
       '7. Paste both tokens below and click Connect',
     ],
     fields: [
@@ -1037,11 +1037,11 @@ const MESSAGING_CHANNELS: MessagingChannelConfig[] = [
       { key: 'app_token', label: 'App Token', placeholder: 'xapp-...', type: 'password', required: true },
     ],
     activeLabel: () => 'Connected to Slack',
-    howToUse: () => 'Open Slack and DM @OpenJarvis to talk to your agent.',
+    howToUse: () => 'Open Slack and DM @Jarvis to talk to your agent.',
   },
 ];
 
-// SendBlue wizard — simplified for standalone page
+// SendBlue wizard â€” simplified for standalone page
 function SendBlueSection({
   agentId,
   binding,
@@ -1130,7 +1130,7 @@ function SendBlueSection({
     boxSizing: 'border-box',
   };
 
-  // Not active — setup wizard
+  // Not active â€” setup wizard
   const steps = [
     {
       title: 'Get SendBlue API keys',
@@ -1241,7 +1241,7 @@ function SendBlueSection({
           </div>
         </div>
       ),
-      canAdvance: true, // webhook is optional — user can skip
+      canAdvance: true, // webhook is optional â€” user can skip
     },
   ];
 
@@ -1831,7 +1831,7 @@ function MemorySection() {
         )}
       </div>
 
-      {/* Add to Memory — two-column grid */}
+      {/* Add to Memory â€” two-column grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Index folder */}
         <div

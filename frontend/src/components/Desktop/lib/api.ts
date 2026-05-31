@@ -1,4 +1,4 @@
-// Desktop API helpers — thin wrappers around the OpenJarvis REST API.
+// Desktop API helpers â€” thin wrappers around the Jarvis REST API.
 // All functions accept an explicit apiUrl so the desktop can be pointed at any server.
 
 // ---------------------------------------------------------------------------

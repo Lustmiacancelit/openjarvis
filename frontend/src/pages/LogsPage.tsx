@@ -58,7 +58,7 @@ export function LogsPage() {
             </div>
           </div>
           <p className="text-sm mt-2 max-w-2xl" style={{ color: 'var(--color-text-secondary)' }}>
-            Recent activity — chat events, model switches, tool calls, and system messages from this session.
+            Recent activity â€” chat events, model switches, tool calls, and system messages from this session.
           </p>
         </header>
 

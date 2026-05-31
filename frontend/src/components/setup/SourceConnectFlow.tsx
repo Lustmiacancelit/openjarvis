@@ -231,7 +231,7 @@ function LocalPanel({
     <div className="flex flex-col gap-4">
       <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
         {displayName} reads data directly from your Mac. Make sure the app is installed and
-        Full Disk Access is granted to OpenJarvis in System Settings.
+        Full Disk Access is granted to Jarvis in System Settings.
       </p>
       <div
         className="px-4 py-3 rounded-lg text-sm"
@@ -240,8 +240,8 @@ function LocalPanel({
           color: 'var(--color-text-secondary)',
         }}
       >
-        <strong>System Settings</strong> → Privacy &amp; Security → Full Disk Access →
-        enable OpenJarvis
+        <strong>System Settings</strong> â†’ Privacy &amp; Security â†’ Full Disk Access â†’
+        enable Jarvis
       </div>
       <button
         onClick={() => onConnect({})}
@@ -269,7 +269,7 @@ function LocalPanel({
 }
 
 // ---------------------------------------------------------------------------
-// StepByStepPanel — per-connector numbered setup instructions
+// StepByStepPanel â€” per-connector numbered setup instructions
 // ---------------------------------------------------------------------------
 
 function StepByStepPanel({
@@ -595,7 +595,7 @@ export function SourceConnectFlow({
               className="w-full py-3 px-4 rounded-xl font-semibold text-sm transition-all"
               style={{ background: 'var(--color-accent)', color: 'var(--color-on-accent)' }}
             >
-              Continue →
+              Continue â†’
             </button>
           </div>
         )}

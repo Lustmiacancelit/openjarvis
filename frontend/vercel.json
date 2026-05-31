@@ -1,0 +1,1 @@
+{"framework":"vite","buildCommand":"npm run build","outputDirectory":"../src/Jarvis/server/static","installCommand":"npm install"}

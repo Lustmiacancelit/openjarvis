@@ -119,7 +119,7 @@ export function EnergyDashboard() {
           Energy Monitoring
         </h3>
         <div className="h-48 flex items-center justify-center text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
-          <span className="hud-mono">{error || 'awaiting telemetry stream…'}</span>
+          <span className="hud-mono">{error || 'awaiting telemetry streamâ€¦'}</span>
         </div>
       </div>
     );

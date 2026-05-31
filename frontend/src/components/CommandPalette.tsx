@@ -5,13 +5,13 @@ import { pullModel, deleteModel, fetchModels, preloadModel, isTauri } from '../l
 
 /** Popular models that users can download from the catalogue. */
 const CATALOGUE_MODELS = [
-  { id: 'qwen3.5:0.8b', size: '~1 GB', desc: 'Qwen 3.5 0.8B — fast, lightweight' },
+  { id: 'qwen3.5:0.8b', size: '~1 GB', desc: 'Qwen 3.5 0.8B â€” fast, lightweight' },
   { id: 'qwen3.5:2b', size: '~2.7 GB', desc: 'Qwen 3.5 2B' },
-  { id: 'qwen3.5:4b', size: '~3.4 GB', desc: 'Qwen 3.5 4B — recommended default' },
+  { id: 'qwen3.5:4b', size: '~3.4 GB', desc: 'Qwen 3.5 4B â€” recommended default' },
   { id: 'qwen3.5:9b', size: '~6.6 GB', desc: 'Qwen 3.5 9B' },
   { id: 'qwen3.5:27b', size: '~17 GB', desc: 'Qwen 3.5 27B' },
   { id: 'qwen3.5:35b', size: '~24 GB', desc: 'Qwen 3.5 35B' },
-  { id: 'qwen3.5:122b', size: '~81 GB', desc: 'Qwen 3.5 122B — largest' },
+  { id: 'qwen3.5:122b', size: '~81 GB', desc: 'Qwen 3.5 122B â€” largest' },
   { id: 'llama3.3:latest', size: '~4.9 GB', desc: 'Llama 3.3 8B' },
   { id: 'mistral:latest', size: '~4.1 GB', desc: 'Mistral 7B' },
   { id: 'gemma3:latest', size: '~3.3 GB', desc: 'Gemma 3 4B' },
@@ -31,39 +31,39 @@ const CLOUD_PROVIDERS: CloudProvider[] = [
   {
     name: 'OpenAI',
     envKey: 'OPENAI_API_KEY',
-    storageKey: 'openjarvis-openai-key',
+    storageKey: 'Jarvis-openai-key',
     models: [
-      { id: 'gpt-4o', desc: 'GPT-4o — fast, multimodal' },
-      { id: 'gpt-4o-mini', desc: 'GPT-4o Mini — cheap, fast' },
-      { id: 'o3-mini', desc: 'o3-mini — reasoning' },
+      { id: 'gpt-4o', desc: 'GPT-4o â€” fast, multimodal' },
+      { id: 'gpt-4o-mini', desc: 'GPT-4o Mini â€” cheap, fast' },
+      { id: 'o3-mini', desc: 'o3-mini â€” reasoning' },
     ],
   },
   {
     name: 'Anthropic',
     envKey: 'ANTHROPIC_API_KEY',
-    storageKey: 'openjarvis-anthropic-key',
+    storageKey: 'Jarvis-anthropic-key',
     models: [
-      { id: 'claude-sonnet-4-6', desc: 'Claude Sonnet 4.6 — balanced' },
-      { id: 'claude-opus-4-6', desc: 'Claude Opus 4.6 — most capable' },
-      { id: 'claude-haiku-4-5', desc: 'Claude Haiku 4.5 — fastest' },
+      { id: 'claude-sonnet-4-6', desc: 'Claude Sonnet 4.6 â€” balanced' },
+      { id: 'claude-opus-4-6', desc: 'Claude Opus 4.6 â€” most capable' },
+      { id: 'claude-haiku-4-5', desc: 'Claude Haiku 4.5 â€” fastest' },
     ],
   },
   {
     name: 'Google',
     envKey: 'GEMINI_API_KEY',
-    storageKey: 'openjarvis-gemini-key',
+    storageKey: 'Jarvis-gemini-key',
     models: [
-      { id: 'gemini-2.5-pro', desc: 'Gemini 2.5 Pro — flagship' },
-      { id: 'gemini-2.5-flash', desc: 'Gemini 2.5 Flash — fast' },
-      { id: 'gemini-3-pro', desc: 'Gemini 3 Pro — latest' },
+      { id: 'gemini-2.5-pro', desc: 'Gemini 2.5 Pro â€” flagship' },
+      { id: 'gemini-2.5-flash', desc: 'Gemini 2.5 Flash â€” fast' },
+      { id: 'gemini-3-pro', desc: 'Gemini 3 Pro â€” latest' },
     ],
   },
   {
     name: 'OpenRouter',
     envKey: 'OPENROUTER_API_KEY',
-    storageKey: 'openjarvis-openrouter-key',
+    storageKey: 'Jarvis-openrouter-key',
     models: [
-      { id: 'openrouter/auto', desc: 'Auto — best model for the task' },
+      { id: 'openrouter/auto', desc: 'Auto â€” best model for the task' },
       { id: 'openrouter/anthropic/claude-sonnet-4', desc: 'Claude Sonnet 4 via OpenRouter' },
       { id: 'openrouter/deepseek/deepseek-r1', desc: 'DeepSeek R1 via OpenRouter' },
     ],
@@ -223,7 +223,7 @@ export function CommandPalette() {
 
     useAppStore.getState().addLogEntry({
       timestamp: Date.now(), level: 'info', category: 'model',
-      message: `${provider.name} API key ${value ? 'saved' : 'removed'}. Refreshing model list…`,
+      message: `${provider.name} API key ${value ? 'saved' : 'removed'}. Refreshing model listâ€¦`,
     });
 
     // Refresh the model list so cloud models appear immediately.
@@ -330,7 +330,7 @@ export function CommandPalette() {
             filtered.length === 0 ? (
               <div className="px-4 py-6 text-center text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
                 {models.length === 0
-                  ? 'No models available — switch to "Download" to get started'
+                  ? 'No models available â€” switch to "Download" to get started'
                   : 'No matching models'}
               </div>
             ) : (
@@ -428,7 +428,7 @@ export function CommandPalette() {
               </div>
             </>
           ) : (
-            /* ── Cloud Models tab ── */
+            /* â”€â”€ Cloud Models tab â”€â”€ */
             <div className="px-4 py-2">
               <div className="text-[11px] mb-3" style={{ color: 'var(--color-text-tertiary)' }}>
                 Add your API keys to use cloud models. Keys are stored locally on your device only.
@@ -529,14 +529,14 @@ export function CommandPalette() {
         >
           {tab === 'installed' ? (
             <>
-              <span><kbd className="font-mono">↑↓</kbd> Navigate</span>
+              <span><kbd className="font-mono">â†‘â†“</kbd> Navigate</span>
               <span><kbd className="font-mono">Enter</kbd> Select</span>
               <span><kbd className="font-mono">Esc</kbd> Close</span>
             </>
           ) : tab === 'catalogue' ? (
             <span>Models are downloaded from the Ollama registry</span>
           ) : (
-            <span>API keys are stored locally and never sent to OpenJarvis servers</span>
+            <span>API keys are stored locally and never sent to Jarvis servers</span>
           )}
         </div>
       </div>

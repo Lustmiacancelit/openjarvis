@@ -18,7 +18,7 @@ export function CostComparison() {
           Cost Comparison
         </h3>
         <div className="h-48 flex items-center justify-center text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
-          <span className="hud-mono">awaiting first inference…</span>
+          <span className="hud-mono">awaiting first inferenceâ€¦</span>
         </div>
       </div>
     );

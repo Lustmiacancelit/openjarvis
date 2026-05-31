@@ -122,7 +122,7 @@ function StatusDot({ status }: { status: string }) {
 }
 
 function formatCost(cost?: number): string {
-  if (cost === undefined || cost === null) return '—';
+  if (cost === undefined || cost === null) return 'â€”';
   return `$${cost.toFixed(4)}`;
 }
 
@@ -281,7 +281,7 @@ const TEMPLATE_INSTRUCTIONS: Record<string, string> = {
   'code_reviewer': 'Review the latest commits in [repo]. Check for bugs, security issues, and style violations. Summarize findings with file paths and line numbers.',
   'meeting-prep': 'Before my next meeting, pull context from my emails, messages, and past meetings with the attendees. Summarize key topics and suggest talking points.',
   'meeting_prep': 'Before my next meeting, pull context from my emails, messages, and past meetings with the attendees. Summarize key topics and suggest talking points.',
-  'personal_deep_research': 'Search across all my personal data — messages, emails, meetings, documents, and notes — to answer [my question]. Cite your sources.',
+  'personal_deep_research': 'Search across all my personal data â€” messages, emails, meetings, documents, and notes â€” to answer [my question]. Cite your sources.',
   'inbox_triager': 'Check my recent emails and messages. Categorize them by priority (urgent, important, FYI, spam). Summarize the top items I should act on.',
 };
 
@@ -290,7 +290,7 @@ function Tooltip({ text }: { text: string }) {
 }
 
 // ---------------------------------------------------------------------------
-// ToolsPicker — dev-inventory style tool selector used by the launch wizard
+// ToolsPicker â€” dev-inventory style tool selector used by the launch wizard
 // ---------------------------------------------------------------------------
 
 const TOOL_CATEGORY_ORDER = [
@@ -323,7 +323,7 @@ const TOOL_CATEGORY_LABELS: Record<string, string> = {
   system: 'shell & exec',
   code: 'code & repl',
   vcs: 'git',
-  storage: 'memory · storage',
+  storage: 'memory Â· storage',
   memory: 'memory',
   knowledge: 'knowledge',
   knowledge_graph: 'knowledge graph',
@@ -356,7 +356,7 @@ function ToolsPicker({
   const [pulseKey, setPulseKey] = useState(0);
 
   // Channels (source === 'channel') live in ChannelRegistry and aren't
-  // directly callable by the LLM — the agent talks to them through the
+  // directly callable by the LLM â€” the agent talks to them through the
   // `channel_send` tool. Showing them in the tools picker is misleading,
   // so filter them out; channel bindings are configured separately.
   const tollableTools = tools.filter((t) => t.source !== 'channel');
@@ -419,7 +419,7 @@ function ToolsPicker({
             </span>
             <span style={{ opacity: 0.5 }}> / {tollableTools.length}</span>
           </span>
-          <span style={{ color: 'var(--color-text-tertiary)', opacity: 0.3 }}>·</span>
+          <span style={{ color: 'var(--color-text-tertiary)', opacity: 0.3 }}>Â·</span>
           <button
             type="button"
             onClick={() => onChange(allSelected ? [] : configurable)}
@@ -464,7 +464,7 @@ function ToolsPicker({
             color: 'var(--color-text-tertiary)',
           }}
         >
-          Loading available tools…
+          Loading available toolsâ€¦
         </div>
       ) : (
         <div
@@ -492,7 +492,7 @@ function ToolsPicker({
                     letterSpacing: '0.1em',
                   }}
                 >
-                  <span style={{ opacity: 0.5 }}>─</span>
+                  <span style={{ opacity: 0.5 }}>â”€</span>
                   <span>{TOOL_CATEGORY_LABELS[category] || category}</span>
                   <span
                     className="flex-1"
@@ -563,7 +563,7 @@ function ToolsPicker({
                             fontSize: 10.5,
                           }}
                         >
-                          {disabled ? '⨯' : isSelected ? '▣' : '□'}
+                          {disabled ? 'â¨¯' : isSelected ? 'â–£' : 'â–¡'}
                         </span>
                         <span>{tool.name}</span>
                       </button>
@@ -596,7 +596,7 @@ function ToolsPicker({
                 opacity: hovered ? 1 : 0.5,
               }}
             >
-              {hovered ? (hovered.configured ? '▸' : '!') : '·'}
+              {hovered ? (hovered.configured ? 'â–¸' : '!') : 'Â·'}
             </span>
             {hovered && (
               <span
@@ -615,7 +615,7 @@ function ToolsPicker({
                 color: 'var(--color-text-tertiary)',
               }}
             >
-              {hovered ? `— ${hint}` : hint}
+              {hovered ? `â€” ${hint}` : hint}
             </span>
           </div>
         </div>
@@ -779,13 +779,13 @@ function LaunchWizard({
     return type;
   };
 
-  // ── Step 1: Template Selection ──
+  // â”€â”€ Step 1: Template Selection â”€â”€
   if (wizard.step === 1) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.6)' }}>
         <div className="rounded-xl p-6 w-full max-w-lg" style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold" style={{ color: 'var(--color-text)' }}>New Agent — Choose Template</h2>
+            <h2 className="text-lg font-semibold" style={{ color: 'var(--color-text)' }}>New Agent â€” Choose Template</h2>
             <button onClick={onClose} className="p-1 rounded hover:bg-opacity-10" style={{ color: 'var(--color-text-tertiary)' }}><X size={18} /></button>
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -799,7 +799,7 @@ function LaunchWizard({
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.background = 'var(--color-bg-secondary)'; }}
               >
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-lg">{(tpl as any).icon || '🤖'}</span>
+                  <span className="text-lg">{(tpl as any).icon || 'ðŸ¤–'}</span>
                   <span className="font-semibold text-sm" style={{ color: 'var(--color-text)' }}>{tpl.name}</span>
                 </div>
                 <div className="text-xs mt-1" style={{ color: 'var(--color-text-tertiary)', textAlign: 'left' }}>{tpl.description}</div>
@@ -823,7 +823,7 @@ function LaunchWizard({
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.background = 'var(--color-bg-secondary)'; }}
             >
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-lg">⚙️</span>
+                <span className="text-lg">âš™ï¸</span>
                 <span className="font-semibold text-sm" style={{ color: 'var(--color-text)' }}>Custom Agent</span>
               </div>
               <div className="text-xs mt-1" style={{ color: 'var(--color-text-tertiary)', textAlign: 'left' }}>Start from scratch. Pick your own tools, schedule, and behavior.</div>
@@ -834,7 +834,7 @@ function LaunchWizard({
     );
   }
 
-  // ── Step 2: Configuration ──
+  // â”€â”€ Step 2: Configuration â”€â”€
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.6)' }}>
       <div className="rounded-xl p-6 w-full max-w-lg max-h-[85vh] overflow-y-auto" style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
@@ -1226,7 +1226,7 @@ function AgentCard({
       {/* Row 2: Schedule + last run */}
       <div className="text-xs mb-2 flex items-center gap-3" style={{ color: 'var(--color-text-tertiary)' }}>
         <span>{formatSchedule(agent.schedule_type, agent.schedule_value)}</span>
-        <span>·</span>
+        <span>Â·</span>
         <span>Last run: {formatRelativeTime(agent.last_run_at)}</span>
       </div>
 
@@ -1333,7 +1333,7 @@ function AgentCard({
 }
 
 // ---------------------------------------------------------------------------
-// Detail view — Configuration grid with editable model
+// Detail view â€” Configuration grid with editable model
 // ---------------------------------------------------------------------------
 
 function AgentInstructionSection({ agent, onAgentUpdated }: { agent: ManagedAgent; onAgentUpdated: () => void }) {
@@ -1384,7 +1384,7 @@ function AgentInstructionSection({ agent, onAgentUpdated }: { agent: ManagedAgen
         </div>
       ) : (
         <p className="text-sm" style={{ color: currentInstruction ? 'var(--color-text)' : 'var(--color-text-tertiary)' }}>
-          {currentInstruction || '(No instruction set — click Edit to add one)'}
+          {currentInstruction || '(No instruction set â€” click Edit to add one)'}
         </p>
       )}
     </div>
@@ -1539,7 +1539,7 @@ function AgentConfigGrid({ agent, onAgentUpdated }: { agent: ManagedAgent; onAge
 }
 
 // ---------------------------------------------------------------------------
-// Detail view — Interact tab
+// Detail view â€” Interact tab
 // ---------------------------------------------------------------------------
 
 /** One entry in the live activity feed assembled from agent events. */
@@ -1575,12 +1575,12 @@ function stepToToolCall(
 }
 
 // ---------------------------------------------------------------------------
-// Interact tab — trace viewer (top) + follow-up chat (bottom).
+// Interact tab â€” trace viewer (top) + follow-up chat (bottom).
 //
 // The chat input doesn't open a side-channel chat; it triggers a real ad-hoc
 // agent run (execute_tick) with the user's question as input. The trace area
 // shows that run live (tick + tool calls over the events WebSocket) and, when
-// idle, the last run's trace steps plus the agent's resulting findings — so
+// idle, the last run's trace steps plus the agent's resulting findings â€” so
 // users can interrogate the agent about its work ("tell me more about X").
 // ---------------------------------------------------------------------------
 function InteractTab({ agentId, agentStatus, onRunStateChange }: { agentId: string; agentStatus: string; onRunStateChange?: () => void }) {
@@ -1736,7 +1736,7 @@ function InteractTab({ agentId, agentStatus, onRunStateChange }: { agentId: stri
     'agent_tick_error',
   ]);
 
-  // Fallback poll — WS is primary, but this catches missed tick_end events and
+  // Fallback poll â€” WS is primary, but this catches missed tick_end events and
   // runs started elsewhere (e.g. the scheduler or the Overview "Run" button).
   useEffect(() => {
     const iv = setInterval(async () => {
@@ -1767,11 +1767,11 @@ function InteractTab({ agentId, agentStatus, onRunStateChange }: { agentId: stri
     setQuestion(q);
     setErrorMsg('');
     setSending(true);
-    setLiveItems([{ kind: 'note', id: 'queued', label: 'Starting run…' }]);
+    setLiveItems([{ kind: 'note', id: 'queued', label: 'Starting runâ€¦' }]);
     startRef.current = Date.now();
     setElapsedMs(0);
     try {
-      // immediate, non-streamed → triggers a real agent run that consumes the
+      // immediate, non-streamed â†’ triggers a real agent run that consumes the
       // question as input. tick_start over the WS confirms; poll is the backstop.
       await askAgent(agentId, q);
       setRunning(true);
@@ -1790,7 +1790,7 @@ function InteractTab({ agentId, agentStatus, onRunStateChange }: { agentId: stri
 
   return (
     <div className="flex flex-col" style={{ minHeight: 360 }}>
-      {/* ── Trace area header ──────────────────────────────── */}
+      {/* â”€â”€ Trace area header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="flex items-center justify-between mb-2">
         <div
           className="flex items-center gap-2 text-sm font-medium"
@@ -1809,20 +1809,20 @@ function InteractTab({ agentId, agentStatus, onRunStateChange }: { agentId: stri
                 className="inline-block w-2 h-2 rounded-full animate-pulse"
                 style={{ background: 'var(--color-accent)' }}
               />
-              Running{elapsedMs > 0 ? ` · ${(elapsedMs / 1000).toFixed(1)}s` : ''}
+              Running{elapsedMs > 0 ? ` Â· ${(elapsedMs / 1000).toFixed(1)}s` : ''}
             </>
           ) : (
             <>
               {agent?.last_run_at
                 ? `Last run ${new Date(agent.last_run_at * 1000).toLocaleString()}`
                 : 'Idle'}
-              {lastTrace && ` · ${lastTrace.outcome}`}
+              {lastTrace && ` Â· ${lastTrace.outcome}`}
             </>
           )}
         </div>
       </div>
 
-      {/* ── Trace area body ────────────────────────────────── */}
+      {/* â”€â”€ Trace area body â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div
         className="flex-1 overflow-y-auto rounded-lg p-3 space-y-3"
         style={{
@@ -1852,7 +1852,7 @@ function InteractTab({ agentId, agentStatus, onRunStateChange }: { agentId: stri
         )}
 
         {isBusy ? (
-          /* LIVE view — current tick */
+          /* LIVE view â€” current tick */
           <>
             {liveItems.map((it) =>
               it.kind === 'tool' ? (
@@ -1876,11 +1876,11 @@ function InteractTab({ agentId, agentStatus, onRunStateChange }: { agentId: stri
               style={{ color: 'var(--color-text-secondary)' }}
             >
               <Loader2 size={13} className="animate-spin" style={{ color: 'var(--color-accent)' }} />
-              {activity || 'Agent is working…'}
+              {activity || 'Agent is workingâ€¦'}
             </div>
           </>
         ) : (
-          /* IDLE view — last run's trace + findings */
+          /* IDLE view â€” last run's trace + findings */
           <>
             {traceSteps.length > 0 && (
               <div className="space-y-2">
@@ -1920,7 +1920,7 @@ function InteractTab({ agentId, agentStatus, onRunStateChange }: { agentId: stri
         <div ref={bottomRef} />
       </div>
 
-      {/* ── Follow-up chat input ───────────────────────────── */}
+      {/* â”€â”€ Follow-up chat input â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="mt-3 pt-3" style={{ borderTop: '1px solid var(--color-border)' }}>
         <textarea
           value={input}
@@ -1931,7 +1931,7 @@ function InteractTab({ agentId, agentStatus, onRunStateChange }: { agentId: stri
               handleAsk();
             }
           }}
-          placeholder={isBusy ? 'Agent is running…' : "Ask a follow-up about this agent's work…"}
+          placeholder={isBusy ? 'Agent is runningâ€¦' : "Ask a follow-up about this agent's workâ€¦"}
           disabled={isBusy}
           className="w-full px-3 py-2 rounded-lg text-sm bg-transparent outline-none resize-none"
           style={{
@@ -1943,7 +1943,7 @@ function InteractTab({ agentId, agentStatus, onRunStateChange }: { agentId: stri
         />
         <div className="flex items-center justify-between mt-2">
           <span className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
-            Sends your question as an ad-hoc run — results appear in the trace above.
+            Sends your question as an ad-hoc run â€” results appear in the trace above.
           </span>
           <button
             onClick={handleAsk}
@@ -1975,7 +1975,7 @@ function ChannelsTab({ agentId }: { agentId: string }) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // suppress unused var – agentId reserved for future per-agent source binding
+  // suppress unused var â€“ agentId reserved for future per-agent source binding
   void agentId;
 
   const loadConnectors = useCallback(() => {
@@ -2079,7 +2079,7 @@ function ChannelsTab({ agentId }: { agentId: string }) {
                   <div style={{ fontSize: 12, color: c.chunks > 0 ? 'var(--color-success)' : 'var(--color-warning)' }}>
                     {c.chunks > 0
                       ? `${c.chunks.toLocaleString()} ${unit}`
-                      : 'Connected — no data synced yet'}
+                      : 'Connected â€” no data synced yet'}
                   </div>
                 </div>
                 <button
@@ -2135,7 +2135,7 @@ function ChannelsTab({ agentId }: { agentId: string }) {
                             textDecoration: 'underline',
                           }}
                         >
-                          {step.urlLabel || 'Open'} →
+                          {step.urlLabel || 'Open'} â†’
                         </a>
                       )}
                     </div>
@@ -2372,13 +2372,13 @@ const MESSAGING_CHANNELS: MessagingChannelConfig[] = [
     icon: '#',
     description: 'DM your agent in any Slack workspace',
     setupSteps: [
-      '1. Go to api.slack.com/apps → click "Create New App" → choose "From an app manifest"',
+      '1. Go to api.slack.com/apps â†’ click "Create New App" â†’ choose "From an app manifest"',
       '2. Select your workspace. When asked for the manifest format, choose JSON. Then paste the manifest below (click "Copy" to copy it):',
-      'COPYABLE:{"display_information":{"name":"OpenJarvis"},"features":{"app_home":{"home_tab_enabled":true,"messages_tab_enabled":true,"messages_tab_read_only_enabled":false},"bot_user":{"display_name":"OpenJarvis","always_online":true}},"oauth_config":{"scopes":{"bot":["chat:write","im:write","im:read","im:history","mpim:read","mpim:history","users:read","channels:read","channels:history","channels:join","groups:read","groups:history","app_mentions:read"]}},"settings":{"event_subscriptions":{"bot_events":["message.im"]},"socket_mode_enabled":true}}',
-      '3. Click "Next" → review the summary → click "Create". Then go to "Install App" in the left sidebar → click "Install to Workspace" → click "Allow"',
+      'COPYABLE:{"display_information":{"name":"Jarvis"},"features":{"app_home":{"home_tab_enabled":true,"messages_tab_enabled":true,"messages_tab_read_only_enabled":false},"bot_user":{"display_name":"Jarvis","always_online":true}},"oauth_config":{"scopes":{"bot":["chat:write","im:write","im:read","im:history","mpim:read","mpim:history","users:read","channels:read","channels:history","channels:join","groups:read","groups:history","app_mentions:read"]}},"settings":{"event_subscriptions":{"bot_events":["message.im"]},"socket_mode_enabled":true}}',
+      '3. Click "Next" â†’ review the summary â†’ click "Create". Then go to "Install App" in the left sidebar â†’ click "Install to Workspace" â†’ click "Allow"',
       '4. In the left sidebar, click "OAuth & Permissions". Copy the "Bot User OAuth Token" (starts with xoxb-...)',
-      '5. In the left sidebar, click "Basic Information" → scroll to "App-Level Tokens" → click "Generate Token and Scopes" → name it "socket" → click "Add Scope" → select "connections:write" → click "Generate" → copy the token (starts with xapp-...)',
-      '6. (Optional) Still in "Basic Information", scroll to "Display Information" → upload the OpenJarvis icon as the app icon',
+      '5. In the left sidebar, click "Basic Information" â†’ scroll to "App-Level Tokens" â†’ click "Generate Token and Scopes" â†’ name it "socket" â†’ click "Add Scope" â†’ select "connections:write" â†’ click "Generate" â†’ copy the token (starts with xapp-...)',
+      '6. (Optional) Still in "Basic Information", scroll to "Display Information" â†’ upload the Jarvis icon as the app icon',
       '7. Paste both tokens below and click Connect',
     ],
     fields: [
@@ -2386,12 +2386,12 @@ const MESSAGING_CHANNELS: MessagingChannelConfig[] = [
       { key: 'app_token', label: 'App Token', placeholder: 'xapp-...', type: 'password', required: true },
     ],
     activeLabel: () => 'Connected to Slack',
-    howToUse: () => 'Open Slack and DM @OpenJarvis to talk to your agent.',
+    howToUse: () => 'Open Slack and DM @Jarvis to talk to your agent.',
   },
 ];
 
 // ---------------------------------------------------------------------------
-// SendBlue webhook step — ngrok tunnel + registration
+// SendBlue webhook step â€” ngrok tunnel + registration
 // ---------------------------------------------------------------------------
 
 function SendBlueWebhookStep({
@@ -2491,7 +2491,7 @@ function SendBlueWebhookStep({
 }
 
 // ---------------------------------------------------------------------------
-// SendBlue setup wizard — guided multi-step flow
+// SendBlue setup wizard â€” guided multi-step flow
 // ---------------------------------------------------------------------------
 
 function SendBlueWizard({
@@ -2573,7 +2573,7 @@ function SendBlueWizard({
         setSelectedNumber(result.numbers[0]);
         setStep('verified');
       } else if (result.valid) {
-        // Free tier / shared line — no dedicated number returned
+        // Free tier / shared line â€” no dedicated number returned
         // Move to verified step so user can enter the number manually
         setNumbers([]);
         setSelectedNumber('');
@@ -2603,7 +2603,7 @@ function SendBlueWizard({
         const webhookUrl = `${window.location.origin}/webhooks/sendblue`;
         await sendblueRegisterWebhook(apiKey, apiSecret, webhookUrl);
       } catch {
-        // Non-fatal — user may need to set up ngrok manually
+        // Non-fatal â€” user may need to set up ngrok manually
       }
       setStep('done');
       onDone();
@@ -2639,7 +2639,7 @@ function SendBlueWizard({
           <div style={{ flex: 1 }}>
             <div style={{ fontWeight: 600, fontSize: 13 }}>iMessage / SMS</div>
             <div style={{ fontSize: 11, color: healthy ? 'var(--color-success)' : 'var(--color-warning)' }}>
-              {healthy ? `Active on ${activeNumber}` : `Disconnected — ${activeNumber}`}
+              {healthy ? `Active on ${activeNumber}` : `Disconnected â€” ${activeNumber}`}
             </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -2711,7 +2711,7 @@ function SendBlueWizard({
     );
   }
 
-  // Not active — setup wizard
+  // Not active â€” setup wizard
   return (
     <div style={cardStyle}>
       {/* Header */}
@@ -2723,7 +2723,7 @@ function SendBlueWizard({
         <div style={{ flex: 1 }}>
           <div style={{ fontWeight: 600, fontSize: 13 }}>iMessage / SMS</div>
           <div style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>
-            Your agent gets its own phone number — text it via iMessage or SMS
+            Your agent gets its own phone number â€” text it via iMessage or SMS
           </div>
         </div>
         <button
@@ -2785,7 +2785,7 @@ function SendBlueWizard({
         </div>
       )}
 
-      {/* Step 2: Number found — confirm + connect */}
+      {/* Step 2: Number found â€” confirm + connect */}
       {(step === 'verified' || step === 'connecting') && (
         <div style={{ borderTop: '1px solid var(--color-border)', padding: 14, background: 'var(--color-bg)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
@@ -2858,7 +2858,7 @@ function SendBlueWizard({
         </div>
       )}
 
-      {/* Step 3: Done — success + webhook setup */}
+      {/* Step 3: Done â€” success + webhook setup */}
       {step === 'done' && (
         <SendBlueWebhookStep
           apiKey={apiKey}
@@ -2931,7 +2931,7 @@ function MessagingTab({ agentId }: { agentId: string }) {
         Connect a messaging channel so you can talk to your agent from your phone or other devices.
       </div>
 
-      {/* SendBlue wizard — primary option */}
+      {/* SendBlue wizard â€” primary option */}
       <SendBlueWizard
         agentId={agentId}
         binding={bindings.find((b) => b.channel_type === 'sendblue')}
@@ -3248,12 +3248,12 @@ function LogsTab({ agentId }: { agentId: string }) {
 
   useEffect(() => {
     loadData();
-    // Fallback slow poll — WS is primary, this catches missed events
+    // Fallback slow poll â€” WS is primary, this catches missed events
     const interval = setInterval(loadData, 30000);
     return () => clearInterval(interval);
   }, [loadData]);
 
-  // Event-driven refresh — trace/learning entries are created by tick + tool events
+  // Event-driven refresh â€” trace/learning entries are created by tick + tool events
   useAgentEvents(agentId, loadData, [
     'agent_tick_end',
     'agent_tick_error',
@@ -3535,7 +3535,7 @@ export function AgentsPage() {
           }
           prevStatuses.current[agent.id] = agent.status;
         }
-        // Keep the agent list — and the derived selectedAgent status badge —
+        // Keep the agent list â€” and the derived selectedAgent status badge â€”
         // live. This poll previously fetched statuses only to fire error
         // toasts and threw the result away, so a detail header could stay
         // stuck on "running" after a tick finished on the backend.
@@ -3553,7 +3553,7 @@ export function AgentsPage() {
     );
   }
 
-  // ── Detail View ─────────────────────────────────────────────────────────
+  // â”€â”€ Detail View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   if (selectedAgent) {
     const successRate =
@@ -3607,7 +3607,7 @@ export function AgentsPage() {
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs"
                 style={{ background: 'var(--color-success)20', color: 'var(--color-success)', border: '1px solid var(--color-success)40' }}
               >
-                <MessageSquare size={13} /> Chat ready — just type below
+                <MessageSquare size={13} /> Chat ready â€” just type below
               </span>
             ) : (
               <button
@@ -3731,7 +3731,7 @@ export function AgentsPage() {
               </div>
             )}
 
-            {/* Usage stats + savings — single compact row */}
+            {/* Usage stats + savings â€” single compact row */}
             {(() => {
               const inTok = selectedAgent.input_tokens ?? 0;
               const outTok = selectedAgent.output_tokens ?? 0;
@@ -3901,7 +3901,7 @@ export function AgentsPage() {
     );
   }
 
-  // ── List View ───────────────────────────────────────────────────────────
+  // â”€â”€ List View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   return (
     <div className="flex-1 overflow-y-auto px-6 py-10">

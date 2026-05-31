@@ -17,7 +17,7 @@ import type {
 } from '../../types';
 
 // While Deep Research is toggled on, poll connected sources for sync
-// progress so we can surface "Searching over N items — sync in progress"
+// progress so we can surface "Searching over N items â€” sync in progress"
 // next to the toggle. Polling is gated on `enabled` so toggling DR off
 // stops the network chatter immediately.
 function useResearchCorpusSync(enabled: boolean): {
@@ -59,7 +59,7 @@ function useResearchCorpusSync(enabled: boolean): {
         }
         if (!cancelled) setState({ syncing, itemsSynced });
       } catch {
-        // Network blip — leave previous state intact.
+        // Network blip â€” leave previous state intact.
       }
     };
 
@@ -157,7 +157,7 @@ export function InputArea() {
     const content = input.trim();
     if (!content || streamState.isStreaming) return;
     if (!selectedModel) {
-      toast.error('Pick a model first (⌘K)');
+      toast.error('Pick a model first (âŒ˜K)');
       return;
     }
 
@@ -226,7 +226,7 @@ export function InputArea() {
       category: 'chat',
       message: deepResearch
         ? `Research: "${content.slice(0, 80)}${content.length > 80 ? '...' : ''}"`
-        : `Request: "${content.slice(0, 80)}${content.length > 80 ? '...' : ''}" → ${selectedModel}`,
+        : `Request: "${content.slice(0, 80)}${content.length > 80 ? '...' : ''}" â†’ ${selectedModel}`,
     });
 
     try {
@@ -301,7 +301,7 @@ export function InputArea() {
               lastFlush = now;
             }
           } else if (ev.type === 'system_metrics') {
-            // Live GPU sample — feed straight to the System panel so Power
+            // Live GPU sample â€” feed straight to the System panel so Power
             // (W) and Energy (kJ) tick up in real time as the agent runs.
             useAppStore.getState().setLiveEnergy({
               power_w: ev.power_w,
@@ -430,7 +430,7 @@ export function InputArea() {
       }
     } catch (err: any) {
       if (err.name === 'AbortError') {
-        // User cancelled or model switch — keep whatever was accumulated
+        // User cancelled or model switch â€” keep whatever was accumulated
         if (!accumulatedContent) accumulatedContent = '(Generation stopped)';
       } else {
         const errMsg = err?.message || String(err);
@@ -474,7 +474,7 @@ export function InputArea() {
           }
         }
       } catch {
-        // Not a digest response or server unavailable — skip
+        // Not a digest response or server unavailable â€” skip
       }
 
       updateLastAssistant(
@@ -499,7 +499,7 @@ export function InputArea() {
       abortRef.current = null;
 
       // Research path updates session counters optimistically from the
-      // `done` event's usage payload — re-fetching here would overwrite
+      // `done` event's usage payload â€” re-fetching here would overwrite
       // it with a potentially stale snapshot if the server's research
       // telemetry hasn't been merged into /v1/savings yet.
       if (!deepResearch) {
@@ -560,7 +560,7 @@ export function InputArea() {
             <span key={corpusSync.itemsSynced} className="sync-bump" style={{ color: 'var(--color-text-secondary)' }}>
               {corpusSync.itemsSynced.toLocaleString()}
             </span>{' '}
-            items — sync in progress, results will improve as more data is indexed.
+            items â€” sync in progress, results will improve as more data is indexed.
           </div>
         )}
       </div>
@@ -577,7 +577,7 @@ export function InputArea() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={selectedModel ? 'Message OpenJarvis...' : 'Pick a model first (⌘K)...'}
+          placeholder={selectedModel ? 'Message Jarvis...' : 'Pick a model first (âŒ˜K)...'}
           rows={1}
           className="flex-1 bg-transparent outline-none resize-none text-sm leading-relaxed"
           style={{ color: 'var(--color-text)', maxHeight: '200px' }}
@@ -603,7 +603,7 @@ export function InputArea() {
             <button
               onClick={sendMessage}
               disabled={!input.trim() || modelLoading || !selectedModel}
-              title={selectedModel ? 'Send message' : 'Pick a model first (⌘K)'}
+              title={selectedModel ? 'Send message' : 'Pick a model first (âŒ˜K)'}
               className="p-2 rounded-xl transition-colors shrink-0 cursor-pointer disabled:opacity-30 disabled:cursor-default"
               style={{
                 background: input.trim() ? 'var(--color-accent)' : 'var(--color-bg-tertiary)',

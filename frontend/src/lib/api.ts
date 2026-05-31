@@ -1,7 +1,7 @@
 import type { ModelInfo, SavingsData, ServerInfo } from '../types';
 
 // ---------------------------------------------------------------------------
-// Supabase config — safe to embed (RLS protects writes)
+// Supabase config â€” safe to embed (RLS protects writes)
 // ---------------------------------------------------------------------------
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://mtbtgpwzrbostweaanpr.supabase.co';
@@ -16,7 +16,7 @@ declare global {
 export const isTauri = () => typeof window !== 'undefined' && !!window.__TAURI_INTERNALS__;
 
 // Cached API base URL fetched from the Tauri backend at startup.
-// This avoids hardcoding the port — the Rust backend is the single
+// This avoids hardcoding the port â€” the Rust backend is the single
 // source of truth for JARVIS_PORT.
 let _tauriApiBase: string | null = null;
 
@@ -35,7 +35,7 @@ const DESKTOP_API_FALLBACK = 'http://127.0.0.1:8000';
 
 const getSettingsApiUrl = (): string => {
   try {
-    const raw = localStorage.getItem('openjarvis-settings');
+    const raw = localStorage.getItem('Jarvis-settings');
     if (raw) {
       const parsed = JSON.parse(raw);
       if (parsed.apiUrl) return parsed.apiUrl.replace(/\/+$/, '');
@@ -194,7 +194,7 @@ export async function checkHealth(): Promise<boolean> {
     }
   }
   // In the browser, hit /health relative to the page origin so the request
-  // flows through whatever path is already serving the SPA — the Vite
+  // flows through whatever path is already serving the SPA â€” the Vite
   // proxy in dev, FastAPI's static mount in prod. This avoids the
   // false-negative "Cannot reach backend" banner when getBase() points at
   // an absolute URL the browser can't reach directly.
@@ -726,7 +726,7 @@ export async function sendAgentMessage(
 /**
  * Ask the agent a question by triggering an ad-hoc run.
  *
- * Posts the question as an `immediate`, non-streamed message — the backend
+ * Posts the question as an `immediate`, non-streamed message â€” the backend
  * stores it and spawns a real agent tick (`execute_tick`) that consumes it as
  * the run's input (tools, trace, and all), rather than a raw one-shot chat.
  * Returns immediately with the stored user message; progress is observed via
@@ -1023,7 +1023,7 @@ export async function setInferenceSource(
     });
   } catch (e: any) {
     // Surface the backend's actionable error strings (e.g. "A server URL is
-    // required…", "Could not store the API key…") as proper Error instances.
+    // requiredâ€¦", "Could not store the API keyâ€¦") as proper Error instances.
     throw new Error(e?.message ?? e ?? 'Failed to save inference source');
   }
 }

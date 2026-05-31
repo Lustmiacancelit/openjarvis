@@ -57,7 +57,7 @@ export function ChatArea() {
           onClick={toggleSystemPanel}
           className="p-1.5 rounded-md transition-colors cursor-pointer"
           style={{ color: 'var(--color-text-tertiary)' }}
-          title={`${systemPanelOpen ? 'Hide' : 'Show'} system panel (${navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}+I)`}
+          title={`${systemPanelOpen ? 'Hide' : 'Show'} system panel (${navigator.platform.includes('Mac') ? 'âŒ˜' : 'Ctrl'}+I)`}
         >
           <PanelIcon size={16} />
         </button>
@@ -109,7 +109,7 @@ export function ChatArea() {
               {getGreeting()}
             </h2>
             <p className="text-sm text-center max-w-sm mb-6" style={{ color: 'var(--color-text-secondary)' }}>
-              Ask anything. Your AI runs locally — private, fast, and always available.
+              Ask anything. Your AI runs locally â€” private, fast, and always available.
             </p>
 
             {/* Quick action hints */}
@@ -160,7 +160,7 @@ export function ChatArea() {
             {(() => {
               if (!streamState.isStreaming || streamState.content !== '') return null;
               // For research messages the ResearchTimeline handles its own
-              // pre-content loading state — suppress the generic dots.
+              // pre-content loading state â€” suppress the generic dots.
               const last = messages[messages.length - 1];
               if (last?.role === 'assistant' && last.isResearch) return null;
               return (
