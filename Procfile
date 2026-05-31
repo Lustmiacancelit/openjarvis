@@ -1,1 +1,1 @@
-web: uv run jarvis serve --port 
+web: uv run jarvis serve --host 0.0.0.0 --port 
