@@ -173,3 +173,5 @@ OpenJarvis is part of [Intelligence Per Watt](https://www.intelligence-per-watt.
 ## License
 
 [Apache 2.0](LICENSE)
+#   o p e n j a r v i s  
+ 
