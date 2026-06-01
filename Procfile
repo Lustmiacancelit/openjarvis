@@ -1,1 +1,1 @@
-web: ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:?Set ANTHROPIC_API_KEY in Railway Variables} OPENJARVIS_CONFIG=configs/openjarvis/config.toml uv run --extra server --extra inference-cloud jarvis serve --host 0.0.0.0 --port ${PORT:-8000}
+web: OPENJARVIS_API_KEY=${OPENJARVIS_API_KEY:?Set OPENJARVIS_API_KEY in Railway Variables} ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:?Set ANTHROPIC_API_KEY in Railway Variables} OPENJARVIS_CONFIG=configs/openjarvis/config.toml uv run --extra server --extra inference-cloud jarvis serve --host 0.0.0.0 --port ${PORT:-8000}
