@@ -1,0 +1,1 @@
+{"build":{"buildCommand":"uv sync --extra server"},"deploy":{"startCommand":"uv run jarvis serve"}}
