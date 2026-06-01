@@ -1,7 +1,7 @@
 [intelligence]
 default_model = "claude-sonnet-4-6"
-preferred_engine = "openai"
-provider = "cloud"
+preferred_engine = "cloud"
+provider = "anthropic"
 temperature = 0.7
 max_tokens = 2048
 
@@ -19,11 +19,7 @@ db_path = "/tmp/memory.db"
 enabled = false
 
 [engine]
-default = "openai"
-
-[engine.openai]
-host = "https://api.anthropic.com/v1"
-api_key_env = "ANTHROPIC_API_KEY"
+default = "cloud"
 
 [engine.ollama]
 host = "http://localhost:11434"

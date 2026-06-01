@@ -1,1 +1,1 @@
-web: uv sync --extra server && uv run jarvis serve
+web: OPENJARVIS_API_KEY=${OPENJARVIS_API_KEY:?Set OPENJARVIS_API_KEY in Railway Variables} ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:?Set ANTHROPIC_API_KEY in Railway Variables} OPENJARVIS_CONFIG=configs/openjarvis/config.toml uv run --extra server --extra inference-cloud jarvis serve --host 0.0.0.0 --port ${PORT:-8000}
