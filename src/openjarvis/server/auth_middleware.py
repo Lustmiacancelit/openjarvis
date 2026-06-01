@@ -12,6 +12,18 @@ from starlette.responses import JSONResponse
 
 logger = logging.getLogger(__name__)
 
+_AUTH_CORS_ORIGINS = {
+    "https://jarvis.flowlog.dev",
+    "https://www.jarvis.flowlog.dev",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:5174",
+    "tauri://localhost",
+    "http://tauri.localhost",
+    "https://tauri.localhost",
+}
+
 
 class AuthMiddleware(BaseHTTPMiddleware):
     """Validates ``Authorization: Bearer <key>`` on ``/v1/*`` and ``/api/*`` routes.
@@ -25,18 +37,23 @@ class AuthMiddleware(BaseHTTPMiddleware):
         self._api_key = api_key or os.environ.get("OPENJARVIS_API_KEY", "")
 
     async def dispatch(self, request: Request, call_next):  # noqa: ANN001
+        if request.method == "OPTIONS":
+            return await call_next(request)
         if self._api_key and self._requires_auth(request.url.path):
             auth = request.headers.get("Authorization", "")
             if not auth:
-                return JSONResponse(
+                return self._auth_error(
+                    request,
                     {"detail": "Missing Authorization header"},
-                    status_code=401,
                 )
             scheme, _, token = auth.partition(" ")
-            if scheme.lower() != "bearer" or token != self._api_key:
-                return JSONResponse(
+            if scheme.lower() != "bearer" or not secrets.compare_digest(
+                token,
+                self._api_key,
+            ):
+                return self._auth_error(
+                    request,
                     {"detail": "Invalid API key"},
-                    status_code=401,
                 )
         return await call_next(request)
 
@@ -44,6 +61,23 @@ class AuthMiddleware(BaseHTTPMiddleware):
     def _requires_auth(path: str) -> bool:
         """Only protect API routes, not the frontend UI or static assets."""
         return path.startswith("/v1/") or path.startswith("/api/")
+
+    @staticmethod
+    def _auth_error(request: Request, payload: dict) -> JSONResponse:
+        """Return an auth error that browsers can read across allowed origins."""
+        response = JSONResponse(payload, status_code=401)
+        origin = request.headers.get("origin", "")
+        if origin in _AUTH_CORS_ORIGINS:
+            response.headers["Access-Control-Allow-Origin"] = origin
+            response.headers["Access-Control-Allow-Credentials"] = "true"
+            response.headers["Access-Control-Allow-Headers"] = (
+                request.headers.get(
+                    "access-control-request-headers",
+                    "authorization,content-type",
+                )
+            )
+            response.headers["Access-Control-Allow-Methods"] = "*"
+        return response
 
 
 
