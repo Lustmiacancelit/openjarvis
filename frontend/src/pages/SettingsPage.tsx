@@ -19,7 +19,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { useAppStore, type ThemeMode } from '../lib/store';
-import { checkHealth, fetchSpeechHealth, getMemoryStats, getInferenceSource, setInferenceSource, type InferenceSource } from '../lib/api';
+import { API_KEY_STORAGE_KEY, checkHealth, fetchSpeechHealth, getMemoryStats, getInferenceSource, setInferenceSource, type InferenceSource } from '../lib/api';
 import { isAutoUpdateDisabled, setAutoUpdateDisabled } from '../components/Desktop/UpdateChecker';
 
 function OllamaModelList() {
@@ -344,6 +344,9 @@ export function SettingsPage() {
                   border: '1px solid var(--color-border)',
                 }}
               />
+            </SettingRow>
+            <SettingRow label="API key" description="Required when the backend is public">
+              <ApiKeyInput storageKey={API_KEY_STORAGE_KEY} placeholder="oj_sk_..." />
             </SettingRow>
           </Section>
 

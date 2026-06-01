@@ -39,3 +39,8 @@ db_path = "/tmp/traces.db"
 host = "0.0.0.0"
 port = 8000
 agent = "simple"
+cors_origins = [
+  "https://jarvis.flowlog.dev",
+  "https://www.jarvis.flowlog.dev",
+  "https://web-production-9b96.up.railway.app",
+]
